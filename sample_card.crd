@@ -5,10 +5,6 @@
   <person>
    <name>John Doe</name>
    <email>john.doe@gmail.com</email>
-   <nickname>johndoeman25</nickname>
-   <gpgpub>A2C4E6F7</gpgpub>
-   <phone>+12345678900</phone>
-   <website>http://foo.bar/</website>
   </person>
   <verification>
    <signedby>Test Verification Authority</signedby>

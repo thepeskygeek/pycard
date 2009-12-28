@@ -9,10 +9,6 @@ Thus, the beginning of a card:
   <person>
    <name>John Doe</name> <- name
    <email>john.doe@gmail.com</email> <- email
-   <nickname>johndoeman25</nickname> <- nickname/username
-   <gpgpub>A2C4E6F7</gpgpub> <- gpg public key
-   <phone>+12345678900</phone> <- mobile/phone number
-   <website>http://foo.bar/</website> <- website
   </person> 
 
 <verification> struct:
@@ -20,7 +16,7 @@ Thus, the beginning of a card:
    <signedby>Test Verification Authority</signedby> <- signer - if self-signed omitted
    <trust level="1" /> <-- trust level - 1 is highest 4 is lowest
    <hash>a2190edfb238c0afe349aff51d92842de1f480de</hash>
-   <server>http://signer.com/server</server> <- server for verifing sig
+   <server>http://signer.com/server</server> <- server for verifing sig - if self-signed is selfsigned
   </verification> 
 
 <hash> is computed using hashlib.sha1(base64.b64encode('nameemailid-for-signersigner-id-verifer-server')).hexdigest().

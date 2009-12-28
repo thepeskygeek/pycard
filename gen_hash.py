@@ -16,5 +16,7 @@ if __name__ == '__main__':
     s.format(s+"{0}".format(i))
     # whew
     s = s + c
+    print "Hashed string: "
     print s
+    print "Line to put in XML pycard:"
     print "<hash>" + hashlib.sha1(base64.b64encode(s)).hexdigest() + "</hash>"
