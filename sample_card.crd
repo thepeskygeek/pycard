@@ -1,0 +1,19 @@
+<?xml version="1.0">
+<card v="1.0">
+ <identity>
+  <person>
+   <name>John Doe</name>
+   <email>john.doe@gmail.com</email>
+   <nickname>johndoeman25</nickname>
+   <gpgpub>A2C4E6F7</gpgpub>
+   <phone>+12345678900</phone>
+   <website>http://foo.bar/</website>
+  </person>
+  <verification>
+   <signedby>Test Verification Authority</signedby>
+   <trust level="1" />
+   <hash type="sha1">3dc1d6b520259eb9270a7bdd7f8af851434dfa05</hash>
+  </verification>
+ </identity>
+</card>
+  
