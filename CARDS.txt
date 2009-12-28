@@ -1,0 +1,57 @@
+pycard identities are XML files.
+
+Thus, the beginning of a card:
+<?xml version="1.0">
+<card v="1.0">
+ <identity>
+  <void>0</void> <- card expired?
+<person> struct:
+  <person>
+   <name>John Doe</name> <- name
+   <email>john.doe@gmail.com</email> <- email
+   <nickname>johndoeman25</nickname> <- nickname/username
+   <gpgpub>A2C4E6F7</gpgpub> <- gpg public key
+   <phone>+12345678900</phone> <- mobile/phone number
+   <website>http://foo.bar/</website> <- website
+  </person> 
+
+<verification> struct:
+  <verification>
+   <signedby>Test Verification Authority</signedby> <- signer - if self-signed omitted
+   <trust level="1" /> <-- trust level - 1 is highest 4 is lowest
+   <hash>a2190edfb238c0afe349aff51d92842de1f480de</hash>
+   <server>http://signer.com/server</server> <- server for verifing sig
+  </verification> 
+
+<hash> is computed using hashlib.sha1(base64.b64encode('nameemailid-for-signersigner-id-verifer-server')).hexdigest().
+Likewise, hashlib.sha1(base64.b64encode('John Doejohn.doe@gmail.com1B8R5EC51http://signer.com/server')).hexdigest() = 'a2190edfb238c0afe349aff51d92842de1f480de'
+Hash is checked with server.
+
+Ending the file:
+ </identity>
+</card> 
+
+-servers-
+
+Servers are GETed to. They return XML.
+
+GET /server?method=exists&hash=a2190edfb238c0afe349aff51d92842de1f480de
+ - verifies if the sig hash exists on server
+ - returns 0 if hash exists or 1 if not
+ - example:
+<?xml version="1.0">
+<pycard_call>
+ <method>exists</method>
+ <hash>a2190edfb238c0afe349aff51d92842de1f480de</hash>
+ <return>0</return>
+</pycard_call>
+GET /server?method=isvoid&hash=a2190edfb238c0afe349aff51d92842de1f480de
+ - checks if hash is void
+ - returns 0 if it isn't or 1 if it is
+ - example:
+<?xml version="1.0">
+<pycard_call>
+ <method>isvoid</method>
+ <hash>a2190edfb238c0afe349aff51d92842de1f480de</hash>
+ <return>0</return>
+</pycard_call>

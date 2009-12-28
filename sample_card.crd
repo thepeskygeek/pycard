@@ -1,6 +1,7 @@
 <?xml version="1.0">
 <card v="1.0">
  <identity>
+  <void>0</void>
   <person>
    <name>John Doe</name>
    <email>john.doe@gmail.com</email>
@@ -12,7 +13,8 @@
   <verification>
    <signedby>Test Verification Authority</signedby>
    <trust level="1" />
-   <hash type="sha1">3dc1d6b520259eb9270a7bdd7f8af851434dfa05</hash>
+   <hash type="sha1">a2190edfb238c0afe349aff51d92842de1f480de</hash>
+   <server>http://signer.com/server</server>
   </verification>
  </identity>
 </card>
