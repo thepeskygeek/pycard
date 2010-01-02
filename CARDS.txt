@@ -1,7 +1,7 @@
 pycard identities are XML files.
 
 Thus, the beginning of a card:
-<?xml version="1.0">
+<?xml version="1.0"?>
 <card v="1.0">
  <identity>
   <void>0</void> <- card expired?

@@ -7,23 +7,17 @@ def warning():
     print
     print "*** ATTENTION"
     print "This utilty will generate a self-signed identity card."
-    print "Please verify your card with a service provider."
+    print "Nobody can verify it."
     print
     print "Please enter true details faithfully."
     print
 
-def gen_hash(name, email):
-    random.seed(hash(random.getrandbits(20))+hash(os.urandom(20))+6+hash(name))
-    i = random.randrange(1, 999999999)
-    s = name + email
-    # welcome to hackville
-    s.format(s+"{0}".format(i))
-    # whew
-    s = s + "selfsigned"
+def gen_hash(name, email, rand):
+    s = name + email + rand + "selfsigned"
     return hashlib.sha1(base64.b64encode(s)).hexdigest()
 
-def create_xml(has, email, name):
-    x = "<?xml version='1.0'><card v='1.0'><identity><person><name>" + name + "</name><email>" + email + "</email></person><verification><trust level='3'/><hash>" + has + "</hash><server>selfsigned</server></verification></identity></card>"
+def create_xml(has, email, name, i):
+    x = "<?xml version='1.0'?><card v='1.0'><identity><person><name>" + name + "</name><email>" + email + "</email></person><verification><id>" + i + "</id><hash>" + has + "</hash><server>selfsigned</server></verification></identity></card>"
     file('identity.crd', 'w').write(x)
 
 if __name__ == "__main__":
@@ -35,7 +29,17 @@ if __name__ == "__main__":
     email = raw_input("Your email: ")
     c = raw_input("Is this all correct? ")
     if c == "yes":
-        h = gen_hash(name, email)
-        create_xml(h, email, name)
+        p = raw_input("(Optional) Enter a phrase: ")
+        if p:
+            i = os.urandom(20) + p + os.urandom(20)
+        else:
+            i = random.randint(1, 10245765466) + random.getrandbits(5)
+        ti = base64.b64encode(i)
+        t = hashlib.md5(ti).hexdigest()
+        i = t
+        h = gen_hash(name, email, i)
+        create_xml(h, email, name, i)
+        print 'Identity card created as identity.crd.'
+        
     else:
         print "Quiting. Please rerun."
