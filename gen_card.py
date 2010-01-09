@@ -1,7 +1,6 @@
 import random
 import os
 import hashlib
-import base64
 
 def warning():
     print
@@ -14,7 +13,7 @@ def warning():
 
 def gen_hash(name, email, rand):
     s = name + email + rand + "selfsigned"
-    return hashlib.sha1(base64.b64encode(s)).hexdigest()
+    return hashlib.sha1(s).hexdigest()
 
 def create_xml(has, email, name, i):
     x = "<?xml version='1.0'?><card v='1.0'><identity><person><name>" + name + "</name><email>" + email + "</email></person><verification><id>" + i + "</id><hash>" + has + "</hash><server>selfsigned</server></verification></identity></card>"
