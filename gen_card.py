@@ -23,7 +23,7 @@ def create_xml(has, email, name, i):
 if __name__ == "__main__":
     warning()
 
-    print "You need to feel out this form. Please answer the questions."
+    print "You need to fill out this form. Please answer the questions."
     print "== REQUIRED"
     name = raw_input("Your name: ")
     email = raw_input("Your email: ")
@@ -31,10 +31,10 @@ if __name__ == "__main__":
     if c == "yes":
         p = raw_input("(Optional) Enter a phrase: ")
         if p:
-            i = os.urandom(20) + p + os.urandom(20)
+            ti = os.urandom(20) + p + os.urandom(20)
         else:
-            i = random.randint(1, 10245765466) + random.getrandbits(5)
-        ti = base64.b64encode(i)
+            i = random.randint(1, random.randint(100000000, 9999999999)) + random.getrandbits(10)
+            ti = str(i)
         t = hashlib.md5(ti).hexdigest()
         i = t
         h = gen_hash(name, email, i)
