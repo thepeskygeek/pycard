@@ -33,12 +33,11 @@ if __name__ == "__main__":
         if p:
             ti = os.urandom(20) + p + os.urandom(20)
         else:
-            i = random.randint(1, random.randint(100000000, 9999999999)) + random.getrandbits(10)
+            i = os.urandom(20) + random.randint(1, random.randint(100000000, 999999999)) + random.getrandbits(10)
             ti = str(i)
-        t = hashlib.md5(ti).hexdigest()
-        i = t
-        h = gen_hash(name, email, i)
-        create_xml(h, email, name, i)
+        t = hashlib.sha1(ti).hexdigest()
+        h = gen_hash(name, email, t)
+        create_xml(h, email, name, t)
         print 'Identity card created as identity.crd.'
         
     else:
